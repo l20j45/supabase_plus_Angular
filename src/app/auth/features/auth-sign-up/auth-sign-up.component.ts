@@ -37,6 +37,12 @@ export class AuthSignUpComponent implements OnInit {
     const authResponse = await this.authService.signUp(this.form.value);
 
     console.log(authResponse);
+    if (authResponse.error == null) {
+      alert("Se creo el usuario satisfactoriamente")
+    } else {
+      alert(authResponse.error.message);
+      console.log(authResponse.error.message)
+    }
   }
 
   get email() {
