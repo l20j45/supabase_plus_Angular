@@ -3,14 +3,16 @@ import {AppComponent} from "./app.component";
 
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: AppComponent,
-    children: [
-      {
-        path: 'auth',
-        loadChildren: () => import('./auth/features/features-routing.module').then((m) => m.FeaturesRoutingModule),
-      }
-    ]
-  },
-];
+
+    {
+      path: 'auth',
+      loadChildren: () => import('./auth/auth-routing.module').then((m) => m.AuthRoutingModule),
+    },
+    {
+      path: '',
+      loadChildren: () => import('./notes/notes-routing.module').then((m) => m.NotesRoutingModule),
+    }
+
+
+  ]
+;
