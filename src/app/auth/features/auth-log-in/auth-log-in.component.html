@@ -10,7 +10,7 @@
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
           Crear cuenta
         </h1>
-        <form class="space-y-4 md:space-y-6" [formGroup]="form" (ngSubmit)="submit()" >
+        <form class="space-y-4 md:space-y-6" [formGroup]="form" (ngSubmit)="submit()">
           <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
             <input type="email" name="email" id="email"
@@ -51,8 +51,8 @@
             Iniciar sesion
           </button>
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-            Iniciar sesion <a routerLink="auth/log-in"
-                              class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign
+            Iniciar sesion <a routerLink="/auth/sign-up"
+                              class="font-medium text-primary-600 hover:underline dark:text-primary-500" >Sign
             up</a>
           </p>
         </form>

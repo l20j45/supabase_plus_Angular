@@ -6,25 +6,29 @@ import {SupabaseService} from "../../shared/data-access/supabase.service";
   providedIn: 'root'
 })
 export class AuthService {
-  superBaseClient: SupabaseClient;
+  supaBaseClient: SupabaseClient;
 
   constructor(public supaBaseService: SupabaseService) {
-    this.superBaseClient = supaBaseService.supabaseClient;
+    this.supaBaseClient = supaBaseService.supabaseClient;
+    this.supaBaseClient.auth.onAuthStateChange(session => {
+      console.log(session)
+    })
   }
 
   signUp(credentials: SignUpWithPasswordCredentials) {
-    return this.superBaseClient.auth.signUp(credentials);
+    return this.supaBaseClient.auth.signUp(credentials);
   }
 
   logIn(credentials: SignUpWithPasswordCredentials) {
-    return this.superBaseClient.auth.signInWithPassword(credentials);
+    return this.supaBaseClient.auth.signInWithPassword(credentials);
   }
 
   signOut() {
-    return this.superBaseClient.auth.signOut();
+    return this.supaBaseClient.auth.signOut();
   }
 
   session() {
+    return this.supaBaseClient.auth.getSession();
   }
 }
 
