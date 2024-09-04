@@ -10,9 +10,9 @@ export class AuthService {
 
   constructor(public supaBaseService: SupabaseService) {
     this.supaBaseClient = supaBaseService.supabaseClient;
-    this.supaBaseClient.auth.onAuthStateChange(session => {
-      console.log(session)
-    })
+    // this.supaBaseClient.auth.onAuthStateChange(session => {
+    //   console.log(session)
+    // })
   }
 
   signUp(credentials: SignUpWithPasswordCredentials) {
