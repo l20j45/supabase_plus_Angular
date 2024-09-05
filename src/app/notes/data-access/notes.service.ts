@@ -72,7 +72,7 @@ export class NotesService {
       }));
 
       const {data: {session}} = await this.authService.session();
-            const {data} = await this.supaBaseClient
+      const {data} = await this.supaBaseClient
         .from('notes')
         .select()
         .returns<note[]>();
@@ -99,7 +99,6 @@ export class NotesService {
   }
 
   async insertNote(Note: { title: string; description: null | string }) {
-
     const {data: {session}} = await this.authService.session();
     try {
       const response = await this.supaBaseClient.from('notes').insert({
@@ -108,11 +107,46 @@ export class NotesService {
         description: Note.description,
         created_at: new Date(),
       });
-      await this.getUserNotes();
+      return this.responseTemplate(response)
     } catch (error) {
-      console.log(error)
+      console.error('Unexpected error:', error);
+      return {success: false, error};
     }
+  }
 
+  async updateNote(Note: { title: string; description: null | string; }, noteId: any) {
+    try {
+      const response = await this.supaBaseClient.from('notes')
+        .update({
+          title: Note.title,
+          description: Note.description,
+        }).eq('id', noteId);
+      return this.responseTemplate(response)
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      return {success: false, error};
+    }
+  }
 
+  async responseTemplate(response: any) {
+    if (response.error) {
+      return {success: false, error: response.error};
+    } else {
+      await this.getUserNotes();
+      return {success: true, data: response.data};
+    }
+  }
+
+  async deleteNote(noteId:string) {
+    try {
+      const response = await this.supaBaseClient
+        .from('notes')
+        .delete()
+        .eq('id', noteId);
+      return this.responseTemplate(response)
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      return {success: false, error};
+    }
   }
 }

@@ -6,9 +6,11 @@
     </a>
 
     <div class="space-x-4">
+      @if (!isAuthenticated){
       <a routerLink="auth/log-in">
         <button class="px-4 py-2 bg-blue-400 dark:bg-amber-200 rounded-3xl ">Iniciar sesion</button>
       </a>
+      }
       <button class="px-4 py-2 bg-blue-400 dark:bg-amber-200 rounded-3xl " (click)="logout()">Cerrar sesion</button>
     </div>
 

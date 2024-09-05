@@ -27,5 +27,9 @@ export class AuthService {
   session() {
     return this.supaBaseService.session()
   }
+
+  isAuthenticated() {
+    return this.supaBaseService.session()
+  }
 }
 
