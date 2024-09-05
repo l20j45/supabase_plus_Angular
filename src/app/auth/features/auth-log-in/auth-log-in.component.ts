@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../service/auth.service";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {FormSignup} from "../../../shared/models/models";
+import {formSignup} from "../../../shared/models/models";
 import {NgIf} from "@angular/common";
 
 @Component({
@@ -20,7 +20,7 @@ export class AuthLogInComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group<FormSignup>({
+    this.form = this.formBuilder.group<formSignup>({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required]),
     })
