@@ -1,30 +1,25 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
+import { Component } from '@angular/core';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NotesService} from "../../data-access/notes.service";
-import {AuthService} from "../../../auth/service/auth.service";
-import {SupabaseService} from "../../../shared/data-access/supabase.service";
 import {noteForm} from "../../../shared/models/models";
 
-
-
 @Component({
-  selector: 'app-add-note',
+  selector: 'app-edit-note',
   standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './add-note.component.html',
-  styleUrl: './add-note.component.scss'
+    imports: [
+        FormsModule,
+        ReactiveFormsModule
+    ],
+  templateUrl: './edit-note.component.html',
+  styleUrl: './edit-note.component.scss'
 })
-export class AddNoteComponent {
+export class EditNoteComponent {
   form: any;
-
-
   constructor(private noteService: NotesService, private formBuilder: FormBuilder) {
-
     this.form = this.formBuilder.group<noteForm>({
       title: this.formBuilder.control(null, Validators.required),
       description: this.formBuilder.control(null),
     });
-
   }
 
   send() {

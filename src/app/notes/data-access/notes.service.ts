@@ -2,7 +2,7 @@ import {computed, Injectable, signal} from '@angular/core';
 import {SupabaseService} from "../../shared/data-access/supabase.service";
 import {SupabaseClient} from "@supabase/supabase-js";
 import {AuthService} from "../../auth/service/auth.service";
-import {Note, NoteState} from "../../shared/models/models";
+import {note, noteState} from "../../shared/models/models";
 
 
 @Injectable({
@@ -17,7 +17,7 @@ export class NotesService {
 
   }
 
-  private state = signal<NoteState>({
+  private state = signal<noteState>({
     notes: [],
     loading: false,
     error: false,
@@ -41,7 +41,7 @@ export class NotesService {
         .from('notes')
         .select()
         .eq('user_id', session?.user.id)
-        .returns<Note[]>();
+        .returns<note[]>();
 
       if (data) {
         this.state.update((stateUpdate) => ({
@@ -75,7 +75,7 @@ export class NotesService {
             const {data} = await this.supaBaseClient
         .from('notes')
         .select()
-        .returns<Note[]>();
+        .returns<note[]>();
 
       if (data) {
         this.state.update((stateUpdate) => ({
@@ -112,5 +112,7 @@ export class NotesService {
     } catch (error) {
       console.log(error)
     }
+
+
   }
 }
